@@ -1,3 +1,5 @@
+import { ThemePalette } from '@angular/material/core';
+
 export interface Client {
   name: string;
   dob: Date; // Date of Birth
@@ -32,3 +34,9 @@ export enum Plan {
   PREMIUM = 'premium'
 }
 
+export interface Task {
+  name: string;
+  completed: boolean;
+  color: ThemePalette;
+  subtasks?: Task[];
+}

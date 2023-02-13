@@ -1,3 +1,173 @@
-<form>
+<form [formGroup]="clientRegisterForm">
+  <div class="left-side">
+    <p>
+      <mat-form-field>
+        <mat-label>Name:</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder=""
+          formControlName="name">
+      </mat-form-field>
+    </p>
 
+    <p>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input
+          formControlName="dob"
+          matInput
+          [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field>
+        <mat-label>Phone:</mat-label>
+        <input
+          type="tel"
+          matInput
+          placeholder=""
+          formControlName="phone">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field>
+        <mat-label>Email:</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder=""
+          formControlName="email">
+      </mat-form-field>
+    </p>
+
+
+    <section class="example-section">
+      <span class="example-list-section">
+        <mat-checkbox class="example-margin"
+                      [checked]="allComplete"
+                      [color]="task.color"
+                      [indeterminate]="someComplete()"
+                      (change)="setAll($event.checked)">
+          {{task.name}}
+        </mat-checkbox>
+      </span>
+      <span class="example-list-section">
+        <ul>
+          <li *ngFor="let subtask of task.subtasks">
+            <mat-checkbox
+              [(ngModel)]="subtask.completed"
+              [ngModelOptions]="{ standalone: true}"
+              [color]="subtask.color"
+              (ngModelChange)="updateAllComplete()">
+              {{subtask.name}}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </span>
+    </section>
+
+    <p>
+      <mat-form-field>
+        <mat-label>Indicated By:</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="name ..."
+          formControlName="indicatedBy">
+      </mat-form-field>
+    </p>
+
+    <mat-radio-group
+      aria-label="Select an option"
+      formControlName="plan">
+      <mat-radio-button value="simple">Simple</mat-radio-button>
+      <mat-radio-button value="premium">Premium</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="right-side">
+
+    <div formGroupName="address">
+      <p>
+        <mat-form-field>
+          <mat-label>Rua:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="street">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Número:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="number">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Bairro:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="neighborhood">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Cidade:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="city">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>UF:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="state">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Complemento:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="complement">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <mat-label>Apelido:</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder=""
+            formControlName="alias">
+        </mat-form-field>
+      </p>
+    </div>
+  </div>
 </form>
