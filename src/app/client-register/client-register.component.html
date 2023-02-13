@@ -1,8 +1,10 @@
-<form [formGroup]="clientRegisterForm">
+<form
+  [formGroup]="clientRegisterForm"
+  (ngSubmit)="save()">
   <div class="left-side">
     <p>
       <mat-form-field>
-        <mat-label>Name:</mat-label>
+        <mat-label>Nome</mat-label>
         <input
           type="text"
           matInput
@@ -13,7 +15,7 @@
 
     <p>
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>Data de nascimento</mat-label>
         <input
           formControlName="dob"
           matInput
@@ -28,7 +30,7 @@
 
     <p>
       <mat-form-field>
-        <mat-label>Phone:</mat-label>
+        <mat-label>Telefone</mat-label>
         <input
           type="tel"
           matInput
@@ -39,7 +41,7 @@
 
     <p>
       <mat-form-field>
-        <mat-label>Email:</mat-label>
+        <mat-label>E-mail</mat-label>
         <input
           type="email"
           matInput
@@ -76,7 +78,7 @@
 
     <p>
       <mat-form-field>
-        <mat-label>Indicated By:</mat-label>
+        <mat-label>Indicado por</mat-label>
         <input
           type="text"
           matInput
@@ -88,7 +90,7 @@
     <mat-radio-group
       aria-label="Select an option"
       formControlName="plan">
-      <mat-radio-button value="simple">Simple</mat-radio-button>
+      <mat-radio-button value="simple">Simples</mat-radio-button>
       <mat-radio-button value="premium">Premium</mat-radio-button>
     </mat-radio-group>
   </div>
@@ -98,7 +100,7 @@
     <div formGroupName="address">
       <p>
         <mat-form-field>
-          <mat-label>Rua:</mat-label>
+          <mat-label>Rua</mat-label>
           <input
             type="text"
             matInput
@@ -107,7 +109,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Número:</mat-label>
+          <mat-label>Número</mat-label>
           <input
             type="text"
             matInput
@@ -118,7 +120,7 @@
 
       <p>
         <mat-form-field>
-          <mat-label>Bairro:</mat-label>
+          <mat-label>Bairro</mat-label>
           <input
             type="text"
             matInput
@@ -129,7 +131,7 @@
 
       <p>
         <mat-form-field>
-          <mat-label>Cidade:</mat-label>
+          <mat-label>Cidade</mat-label>
           <input
             type="text"
             matInput
@@ -138,7 +140,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>UF:</mat-label>
+          <mat-label>UF</mat-label>
           <input
             type="text"
             matInput
@@ -149,7 +151,7 @@
 
       <p>
         <mat-form-field>
-          <mat-label>Complemento:</mat-label>
+          <mat-label>Complemento</mat-label>
           <input
             type="text"
             matInput
@@ -160,7 +162,7 @@
 
       <p>
         <mat-form-field>
-          <mat-label>Apelido:</mat-label>
+          <mat-label>Apelido</mat-label>
           <input
             type="text"
             matInput
@@ -170,4 +172,8 @@
       </p>
     </div>
   </div>
+  <button
+    type="submit"
+    mat-flat-button
+    color="primary">Salvar</button>
 </form>

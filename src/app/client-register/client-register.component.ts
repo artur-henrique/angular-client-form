@@ -13,13 +13,13 @@ import { Task } from '../model/client.model';
 export class ClientRegisterComponent implements OnInit {
   clientRegisterForm: FormGroup;
   task: Task = {
-    name: 'All',
+    name: 'Todos',
     completed: false,
     color: 'primary',
     subtasks: [
       {name: 'SMS', completed: false, color: 'accent'},
-      {name: 'Call', completed: false, color: 'accent'},
-      {name: 'Email', completed: false, color: 'accent'},
+      {name: 'Ligação', completed: false, color: 'accent'},
+      {name: 'E-mail', completed: false, color: 'accent'},
     ],
   };
 
@@ -65,5 +65,9 @@ export class ClientRegisterComponent implements OnInit {
       return;
     }
     this.task.subtasks.forEach(t => (t.completed = completed));
+  }
+
+  save() {
+    console.log(this.clientRegisterForm);
   }
 }

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClientRegisterComponent } from './client-register/client-register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -27,6 +28,7 @@ import {MatRadioModule} from '@angular/material/radio';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatButtonModule,
     MatInputModule,
     MatIconModule,
     MatDatepickerModule,
