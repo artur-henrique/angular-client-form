@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="client-list">
+    <div class="client" *ngFor="let client of clients">
+        <span>{{ client.name }}</span>
+        <button type="button">edit</button>
+        <button type="button">delete</button>
+    </div>
+  </div>
+  <p>COLOCAR PAGINAÇÃO AQUI (1, 2, 3, ...)</p>
+  <button (click)="addClient()">Add Client</button>
+</div>
