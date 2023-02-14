@@ -51,13 +51,16 @@
     </p>
 
 
-    <section class="example-section">
-      <span class="example-list-section">
-        <mat-checkbox class="example-margin"
-                      [checked]="allComplete"
-                      [color]="task.color"
-                      [indeterminate]="someComplete()"
-                      (change)="setAll($event.checked)">
+    <section
+    class="example-section">
+    <span class="example-list-section">
+      <mat-checkbox
+          formControlName="contact"
+          class="example-margin"
+          [checked]="allComplete"
+          [color]="task.color"
+          [indeterminate]="someComplete()"
+          (change)="setAll($event.checked)">
           {{task.name}}
         </mat-checkbox>
       </span>
@@ -95,16 +98,18 @@
     </mat-radio-group>
   </div>
 
-  <div class="right-side">
-
-    <div formGroupName="address">
+  <div formArrayName="adresses">
+    <h2>Endereços</h2>
+    <div
+      *ngFor="let address of adresses; let i = index"
+      [formGroupName]="i"
+      >
       <p>
         <mat-form-field>
           <mat-label>Rua</mat-label>
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="street">
         </mat-form-field>
 
@@ -113,7 +118,6 @@
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="number">
         </mat-form-field>
       </p>
@@ -124,7 +128,6 @@
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="neighborhood">
         </mat-form-field>
       </p>
@@ -135,7 +138,6 @@
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="city">
         </mat-form-field>
 
@@ -144,7 +146,6 @@
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="state">
         </mat-form-field>
       </p>
@@ -155,7 +156,6 @@
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="complement">
         </mat-form-field>
       </p>
@@ -166,14 +166,21 @@
           <input
             type="text"
             matInput
-            placeholder=""
             formControlName="alias">
         </mat-form-field>
       </p>
+      <hr>
     </div>
+    <button
+      type="button"
+      (click)="onAddAdress()"
+      mat-flat-button
+      color="primary">+</button>
   </div>
+
   <button
     type="submit"
     mat-flat-button
-    color="primary">Salvar</button>
+    color="primary">Salvar
+  </button>
 </form>

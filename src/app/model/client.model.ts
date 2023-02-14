@@ -36,6 +36,7 @@ export enum Plan {
 
 export interface Task {
   name: string;
+  value?: string;
   completed: boolean;
   color: ThemePalette;
   subtasks?: Task[];
