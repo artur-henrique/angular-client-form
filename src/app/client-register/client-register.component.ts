@@ -20,6 +20,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 })
 export class ClientRegisterComponent implements OnInit {
   clientRegisterForm: FormGroup;
+  phoneMask = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   // Contact
   task: Task = {

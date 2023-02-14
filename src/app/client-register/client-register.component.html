@@ -37,6 +37,7 @@
         <mat-label>Telefone</mat-label>
         <input
           type="tel"
+          [textMask]="{ mask: phoneMask }"
           matInput
           placeholder=""
           formControlName="phone">

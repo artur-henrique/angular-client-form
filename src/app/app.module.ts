@@ -21,12 +21,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientListComponent,
-    ClientRegisterComponent
+    ClientRegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
+    TextMaskModule,
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -45,7 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatAutocompleteModule,
     MatListModule,
     MatDividerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
