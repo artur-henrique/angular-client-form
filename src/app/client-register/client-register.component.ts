@@ -1,9 +1,11 @@
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { Task } from '../model/client.model';
+import { ClientService } from '../services/client.service';
 
-
+//
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-client-register',
@@ -12,6 +14,8 @@ import { Task } from '../model/client.model';
 })
 export class ClientRegisterComponent implements OnInit {
   clientRegisterForm: FormGroup;
+
+  // Contact
   task: Task = {
     name: 'Todos',
     completed: false,
@@ -24,6 +28,13 @@ export class ClientRegisterComponent implements OnInit {
   };
   allComplete: boolean = false;
 
+  // Indication
+  clientNamesList: string[];
+  filteredNames: Observable<string[]>;
+
+  constructor(
+    private clientService: ClientService
+  ) {}
 
   ngOnInit() {
     this.clientRegisterForm = new FormGroup({
@@ -47,6 +58,18 @@ export class ClientRegisterComponent implements OnInit {
       ]),
       'tags': new FormControl(null),
     })
+
+    this.clientNamesList = this.clientNames;
+    this.filteredNames = this.clientRegisterForm.get('indicatedBy').valueChanges.pipe(
+      startWith(''),
+      map(typedName => this._filter(typedName || '')),
+    );
+  }
+
+  private _filter(typedName: string): string[] {
+    const filteredName = typedName.toLowerCase();
+
+    return this.clientNamesList.filter(name => name.toLowerCase().includes(filteredName));
   }
 
 
@@ -88,6 +111,10 @@ export class ClientRegisterComponent implements OnInit {
 
   get adresses() {
     return (<FormArray>this.clientRegisterForm.get('adresses')).controls
+  }
+
+  get clientNames() {
+    return this.clientService.findAll().map(client => client.name);
   }
 
   onAddAdress() {
