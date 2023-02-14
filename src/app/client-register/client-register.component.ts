@@ -7,6 +7,12 @@ import { ClientService } from '../services/client.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
+// MatChip
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ElementRef, ViewChild } from '@angular/core';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
+
 @Component({
   selector: 'app-client-register',
   templateUrl: './client-register.component.html',
@@ -31,6 +37,14 @@ export class ClientRegisterComponent implements OnInit {
   // Indication
   clientNamesList: string[];
   filteredNames: Observable<string[]>;
+
+  // MatChips
+  // @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  tagControl = new FormControl(null);
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  allTags: string[] = ['Diário', 'Semanal', 'Mensal', 'Anual'];
+  filteredTags: Observable<string[]>;
+  tags: string[] = [];
 
   constructor(
     private clientService: ClientService
@@ -64,6 +78,18 @@ export class ClientRegisterComponent implements OnInit {
       startWith(''),
       map(typedName => this._filter(typedName || '')),
     );
+
+    // MatChip
+    this.filteredTags = this.tagControl.valueChanges.pipe(
+      startWith(''),
+      map(tag => this._filterTags(tag || '')),
+    );
+  }
+
+  private _filterTags(typedTag: string): string[] {
+    const filteredTag = typedTag.toLowerCase();
+
+    return this.allTags.filter(tag => tag.toLowerCase().includes(filteredTag));
   }
 
   private _filter(typedName: string): string[] {
@@ -129,4 +155,34 @@ export class ClientRegisterComponent implements OnInit {
     });
     (<FormArray>this.clientRegisterForm.get('adresses')).push(newAddressGroup);
   }
+
+  // MatChip functions
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+    // Add our tag
+    if (value) {
+      this.tags.push(value);
+    }
+    // Clear the input value
+    event.chipInput!.clear();
+    this.tagControl.setValue(null);
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.tags.push(event.option.viewValue);
+    // this.tagInput.nativeElement.value = '';
+    this.tagControl.setValue(null);
+  }
+
+
+
 }

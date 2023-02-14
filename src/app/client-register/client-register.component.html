@@ -7,6 +7,7 @@
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input
+          pattern="/a-Z/"
           type="text"
           matInput
           placeholder=""
@@ -188,8 +189,41 @@
       type="button"
       (click)="onAddAdress()"
       mat-flat-button
-      color="primary">+</button>
+      color="primary">
+    +</button>
   </div>
+
+  <p>
+    <mat-form-field class="example-chip-list" appearance="fill">
+      <mat-label>Tags</mat-label>
+      <mat-chip-grid
+        formControlName="tags"
+        #chipGrid
+        aria-label="Tags selection">
+        <mat-chip-row
+          *ngFor="let tag of tags"
+          (removed)="remove(tag)">
+          {{tag}}
+          <button matChipRemove [attr.aria-label]="'remove ' + tag">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+      <input
+        [formControl]="tagControl"
+        placeholder="Nova Tag..."
+        [matChipInputFor]="chipGrid"
+        [matAutocomplete]="clientTags"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"/>
+      <mat-autocomplete #clientTags="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+          {{tag}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </p>
+
 
   <button
     type="submit"
