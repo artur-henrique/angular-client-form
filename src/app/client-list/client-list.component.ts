@@ -11,6 +11,8 @@ import { ClientService } from '../services/client.service';
 })
 export class ClientListComponent implements OnInit {
   clients: Client[];
+  length: number;
+  pageSize: number;
 
   constructor(
     private clientService: ClientService,
@@ -19,6 +21,8 @@ export class ClientListComponent implements OnInit {
 
   ngOnInit() {
     this.clients = this.clientService.findAll();
+    this.length = this.clients.length;
+    this.pageSize = this.length < 3 ? this.length : 3;
   }
 
   addClient() {
