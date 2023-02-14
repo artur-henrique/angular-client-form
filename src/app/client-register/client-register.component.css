@@ -1,0 +1,25 @@
+form {
+  display: flex;
+}
+
+.left-side {
+  margin-right: 2rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+mat-icon {
+  font-weight: 1000;
+  width: 30px;
+  height: 30px;
+}
+
+p {
+  margin: 0;
+}
+
+.btn {
+  margin: 2em 0;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Task } from '../model/client.model';
 import { ClientService } from '../services/client.service';
 
@@ -9,7 +9,7 @@ import {map, startWith} from 'rxjs/operators';
 
 // MatChip
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { ElementRef, ViewChild } from '@angular/core';
+// import { ElementRef, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 
@@ -55,7 +55,7 @@ export class ClientRegisterComponent implements OnInit {
       'name': new FormControl(null),
       'dob': new FormControl(null),
       'phone': new FormControl(null),
-      'email': new FormControl(null),
+      'email': new FormControl(null, Validators.email),
       'contact': new FormControl(null),
       'indicatedBy': new FormControl(null),
       'plan': new FormControl(null),

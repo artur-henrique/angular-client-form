@@ -1,8 +1,10 @@
-<form
+<div>
+  <form
   [formGroup]="clientRegisterForm"
   (ngSubmit)="save()">
 
   <div class="left-side">
+    <h2>Cliente</h2>
     <p>
       <mat-form-field>
         <mat-label>Nome</mat-label>
@@ -51,6 +53,9 @@
           formControlName="email">
       </mat-form-field>
     </p>
+    <span *ngIf="!clientRegisterForm.get('email').valid && clientRegisterForm.get('email').touched">
+      Please enter a valid email!
+    </span>
 
 
     <section
@@ -109,125 +114,129 @@
     </mat-radio-group>
     </p>
 
-
-  </div>
-
-  <div formArrayName="adresses">
-    <h2>Endereços</h2>
-    <div
-      *ngFor="let address of adresses; let i = index"
-      [formGroupName]="i"
-      >
-      <p>
-        <mat-form-field>
-          <mat-label>Rua</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="street">
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Número</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="number">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <mat-label>Bairro</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="neighborhood">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <mat-label>Cidade</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="city">
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>UF</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="state">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <mat-label>Complemento</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="complement">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <mat-label>Apelido</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="alias">
-        </mat-form-field>
-      </p>
-      <hr>
-    </div>
     <button
-      type="button"
-      (click)="onAddAdress()"
+      class="btn"
+      type="submit"
       mat-flat-button
-      color="primary">
-    +</button>
+      color="primary">Salvar
+    </button>
+
   </div>
 
-  <p>
-    <mat-form-field class="example-chip-list" appearance="fill">
-      <mat-label>Tags</mat-label>
-      <mat-chip-grid
-        formControlName="tags"
-        #chipGrid
-        aria-label="Tags selection">
-        <mat-chip-row
-          *ngFor="let tag of tags"
-          (removed)="remove(tag)">
-          {{tag}}
-          <button matChipRemove [attr.aria-label]="'remove ' + tag">
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip-row>
-      </mat-chip-grid>
-      <input
-        [formControl]="tagControl"
-        placeholder="Nova Tag..."
-        [matChipInputFor]="chipGrid"
-        [matAutocomplete]="clientTags"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        (matChipInputTokenEnd)="add($event)"/>
-      <mat-autocomplete #clientTags="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-          {{tag}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </p>
+  <div class="right-side">
+    <div formArrayName="adresses">
+      <h2>Endereços</h2>
+      <div
+        *ngFor="let address of adresses; let i = index"
+        [formGroupName]="i"
+        >
+        <p>
+          <mat-form-field>
+            <mat-label>Rua</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="street">
+          </mat-form-field>
 
+          <mat-form-field>
+            <mat-label>Número</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="number">
+          </mat-form-field>
+        </p>
 
-  <button
-    type="submit"
-    mat-flat-button
-    color="primary">Salvar
-  </button>
+        <p>
+          <mat-form-field>
+            <mat-label>Bairro</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="neighborhood">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Cidade</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="city">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>UF</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="state">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Complemento</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="complement">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <mat-label>Apelido</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="alias">
+          </mat-form-field>
+        </p>
+        <hr>
+      </div>
+      <button
+        class="btn"
+        type="button"
+        (click)="onAddAdress()"
+        mat-mini-fab
+        color="primary">
+        <mat-icon>+</mat-icon>
+      </button>
+    </div>
+
+    <p>
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid
+          formControlName="tags"
+          #chipGrid
+          aria-label="Tags selection">
+          <mat-chip-row
+            *ngFor="let tag of tags"
+            (removed)="remove(tag)">
+            {{tag}}
+            <button matChipRemove [attr.aria-label]="'remove ' + tag">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input
+          [formControl]="tagControl"
+          placeholder="Nova Tag..."
+          [matChipInputFor]="chipGrid"
+          [matAutocomplete]="clientTags"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"/>
+        <mat-autocomplete #clientTags="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </p>
+  </div>
 </form>
+</div>
