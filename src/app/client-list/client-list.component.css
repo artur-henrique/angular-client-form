@@ -1,0 +1,39 @@
+.client-name {
+  font-size: 1.5em;
+  text-align: center;
+  width: 800px;
+}
+
+mat-list {
+  align-self: center;
+}
+
+mat-list-item {
+  margin: 0.25em;
+}
+
+button {
+  margin: 0.5em;
+}
+
+.add-client {
+  align-self: center;
+}
+
+.paginator {
+  align-self: center;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 700,
+  'GRAD' 0,
+  'opsz' 48
+}

@@ -1,11 +1,38 @@
-<div class="container">
-  <div class="client-list">
-    <div class="client" *ngFor="let client of clients">
-        <span>{{ client.name }}</span>
-        <button type="button">edit</button>
-        <button type="button">delete</button>
-    </div>
-  </div>
-  <p>COLOCAR PAGINAÇÃO AQUI (1, 2, 3, ...)</p>
-  <button (click)="addClient()">Add Client</button>
+<div class="page-container">
+  <mat-list role="list">
+    <mat-list-item
+      role="listItem"
+      *ngFor="let client of clients">
+      <span class="client-name">{{client.name}}</span>
+      <button>
+        <span class="material-symbols-outlined">
+          edit_square
+        </span>
+      </button>
+      <button>
+        <span class="material-symbols-outlined">
+          delete
+        </span>
+      </button>
+    </mat-list-item>
+  </mat-list>
+
+  <button
+    class="add-client"
+    mat-button
+    color="primary"
+    (click)="addClient()">
+    <span
+      class="material-symbols-outlined">
+      add_circle
+    </span>
+  </button>
+
+  <mat-paginator
+    class="paginator"
+    [length]="5"
+    [pageSize]="3"
+    [pageSizeOptions]="[3, 5, 10, 20]"
+    aria-label="Select page">
+  </mat-paginator>
 </div>
