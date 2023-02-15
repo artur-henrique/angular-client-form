@@ -81,9 +81,10 @@ export class ClientRegisterComponent implements OnInit {
       .subscribe(
         (info) => {
           this.action = info['action'];
+
+          if (this.action !== 'Editar') return
+
           const client = JSON.parse(info['client']);
-          // console.log((<FormArray>this.clientRegisterForm.controls['adresses']).controls[0]);
-          console.log(client);
 
           this.clientRegisterForm.setValue({
             name: client.name,
@@ -104,8 +105,6 @@ export class ClientRegisterComponent implements OnInit {
             } ],
             tags: client.tags
           })
-
-          console.log(this.clientRegisterForm.controls);
         }
     )
 
