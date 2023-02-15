@@ -13,6 +13,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CepService } from '../services/cep.service';
 
 @Component({
   selector: 'app-client-register',
@@ -51,7 +52,8 @@ export class ClientRegisterComponent implements OnInit {
 
   constructor(
     private clientService: ClientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cepService: CepService
   ) {}
 
   ngOnInit() {
@@ -68,6 +70,7 @@ export class ClientRegisterComponent implements OnInit {
           'street': new FormControl(null),
           'number': new FormControl(null),
           'neighborhood': new FormControl(null),
+          'cep': new FormControl(null),
           'city': new FormControl(null),
           'state': new FormControl(null),
           'complement': new FormControl(null),
@@ -102,6 +105,7 @@ export class ClientRegisterComponent implements OnInit {
                 street: client.adresses[0].street,
                 number: client.adresses[0].number,
                 neighborhood: client.adresses[0].neighborhood,
+                cep: client.adresses[0].cep,
                 city: client.adresses[0].city,
                 state: client.adresses[0].state,
                 complement: client.adresses[0].complement,
@@ -188,6 +192,7 @@ export class ClientRegisterComponent implements OnInit {
       'street': new FormControl(null),
       'number': new FormControl(null),
       'neighborhood': new FormControl(null),
+      'cep': new FormControl(null),
       'city': new FormControl(null),
       'state': new FormControl(null),
       'complement': new FormControl(null),
@@ -225,6 +230,25 @@ export class ClientRegisterComponent implements OnInit {
 
   teste(event: InputEvent) {
     console.log(event);
+  }
+
+  onCepChange(value: string) {
+    const cep = value.replace(/\D/g, '');
+    if (cep.length === 8) {
+      this.cepService.searchForAddress(cep)
+        .subscribe(addr => {
+          this.clientRegisterForm.patchValue({
+            adresses:
+              [ {
+                street: addr.logradouro,
+                neighborhood: addr.bairro,
+                city: addr.localidade,
+                state: addr.uf,
+                complement: addr.complemento,
+              } ],
+          })
+        })
+    }
   }
 
 }

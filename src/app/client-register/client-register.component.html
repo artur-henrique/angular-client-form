@@ -158,6 +158,16 @@
               matInput
               formControlName="neighborhood">
           </mat-form-field>
+            <mat-form-field>
+              <mat-label>CEP</mat-label>
+              <input
+                name="{{i}}"
+                type="text"
+                (ngModelChange)="onCepChange($event)"
+                matInput
+                placeholder=""
+                formControlName="cep">
+            </mat-form-field>
         </p>
 
         <p>

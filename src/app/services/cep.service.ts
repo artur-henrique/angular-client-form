@@ -1,6 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+interface AddressCep {
+  bairro: string;
+  cep: string;
+  complemento: string;
+  ddd: string;
+  gia: string;
+  ibge: string;
+  localidade: string;
+  logradouro: string;
+  siafi: string;
+  uf: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class CepService {
   constructor(
@@ -8,7 +21,6 @@ export class CepService {
   ) {}
 
   searchForAddress(cep: string) {
-    this.http.get(`https://viacep.com.br/ws/${cep}/json`)
-      .subscribe(address => console.log(address))
+    return this.http.get<AddressCep>(`https://viacep.com.br/ws/${cep}/json`);
   }
 }
