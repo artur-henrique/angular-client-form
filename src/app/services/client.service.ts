@@ -16,7 +16,16 @@ export class ClientService {
       contact: [ Contact.ALL ],
       indicatedBy: 'John',
       plan: Plan.SIMPLE,
-      address: [
+      adresses: [
+        {
+          street: 'R. Bacharel Clito César Rabelo',
+          number: 86,
+          neighborhood: 'São Judas',
+          city: 'Itajaí',
+          state: 'Santa Catarina',
+          complement: 'Perto da panificadora Big Pão',
+          alias: 'Residencial'
+        },
         {
           street: 'R. Bacharel Clito César Rabelo',
           number: 86,
@@ -39,7 +48,7 @@ export class ClientService {
       contact: [ Contact.ALL ],
       indicatedBy: 'John',
       plan: Plan.SIMPLE,
-      address: [
+      adresses: [
         {
           street: 'R. Bacharel Clito César Rabelo',
           number: 86,
@@ -62,7 +71,7 @@ export class ClientService {
       contact: [ Contact.ALL ],
       indicatedBy: 'John',
       plan: Plan.SIMPLE,
-      address: [
+      adresses: [
         {
           street: 'R. Bacharel Clito César Rabelo',
           number: 86,
@@ -85,7 +94,7 @@ export class ClientService {
       contact: [ Contact.ALL ],
       indicatedBy: 'Liam',
       plan: Plan.SIMPLE,
-      address: [
+      adresses: [
         {
           street: 'R. Indaial',
           number: 86,
@@ -108,7 +117,7 @@ export class ClientService {
       contact: [ Contact.EMAIL, Contact.CALL ],
       indicatedBy: 'John',
       plan: Plan.PREMIUM,
-      address: [
+      adresses: [
         {
           street: 'R. Lauro Muller',
           number: 86,
@@ -131,7 +140,7 @@ export class ClientService {
       contact: [ Contact.ALL ],
       indicatedBy: 'Julian',
       plan: Plan.SIMPLE,
-      address: [
+      adresses: [
         {
           street: 'R. Afonso ',
           number: 86,

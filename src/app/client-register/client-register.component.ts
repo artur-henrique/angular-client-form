@@ -82,9 +82,12 @@ export class ClientRegisterComponent implements OnInit {
         (info) => {
           this.action = info['action'];
 
-          if (this.action !== 'Editar') return
+          if (this.action !== 'Editar') return  // Continua apenas quando for uma edição de cliente
 
           const client = JSON.parse(info['client']);
+
+          // const addressList = client.adresses.map(address => new FormControl(address));
+          // console.log(addressList); // Tentativa de adicionar os endereços adicionais no cliente
 
           this.clientRegisterForm.setValue({
             name: client.name,
@@ -94,15 +97,16 @@ export class ClientRegisterComponent implements OnInit {
             contact: client.contact,
             indicatedBy: client.indicatedBy,
             plan: client.plan,
-            adresses: [ {
-              street: client.address[0].street,
-              number: client.address[0].number,
-              neighborhood: client.address[0].neighborhood,
-              city: client.address[0].city,
-              state: client.address[0].state,
-              complement: client.address[0].complement,
-              alias: client.address[0].alias
-            } ],
+            adresses:
+              [ {
+                street: client.adresses[0].street,
+                number: client.adresses[0].number,
+                neighborhood: client.adresses[0].neighborhood,
+                city: client.adresses[0].city,
+                state: client.adresses[0].state,
+                complement: client.adresses[0].complement,
+                alias: client.adresses[0].alias
+              } ],
             tags: client.tags
           })
         }

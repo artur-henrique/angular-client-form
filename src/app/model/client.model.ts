@@ -9,7 +9,7 @@ export interface Client {
   contact: Contact[];
   indicatedBy: string;
   plan: Plan;
-  address: Address[];
+  adresses: Address[];
   tags: string[]
 }
 
