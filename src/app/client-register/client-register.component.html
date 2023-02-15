@@ -47,9 +47,9 @@
       <mat-form-field>
         <mat-label>E-mail</mat-label>
         <input
-          type="email"
+          type="text"
+          (input)="teste($any($event))"
           matInput
-          placeholder=""
           formControlName="email">
       </mat-form-field>
     </p>

@@ -59,7 +59,7 @@ export class ClientRegisterComponent implements OnInit {
       'name': new FormControl(null),
       'dob': new FormControl(null),
       'phone': new FormControl(null),
-      'email': new FormControl(null, Validators.email),
+      'email': new FormControl(null, [Validators.email, Validators.pattern(/.+@.+\..+/)]),
       'contact': new FormControl(null),
       'indicatedBy': new FormControl(null),
       'plan': new FormControl(null),
@@ -223,6 +223,8 @@ export class ClientRegisterComponent implements OnInit {
     this.tagControl.setValue(null);
   }
 
-
+  teste(event: InputEvent) {
+    console.log(event);
+  }
 
 }
