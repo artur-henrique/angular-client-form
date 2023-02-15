@@ -4,7 +4,7 @@
       role="listItem"
       *ngFor="let client of paginationSlice">
       <span class="client-name">{{client.name}}</span>
-      <button (click)="onEditClient($event)">
+      <button (click)="onEditClient(client)">
         <span class="material-symbols-outlined">
           edit_square
         </span>

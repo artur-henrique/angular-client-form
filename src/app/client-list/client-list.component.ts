@@ -58,8 +58,14 @@ export class ClientListComponent implements OnInit, OnDestroy {
     this.paginationSlice = this.clients.slice(this.startIndex, this.endIndex);
   }
 
-  onEditClient(event: MouseEvent) {
-    console.log(event);
+  onEditClient(client: Client) {
+    this.router.navigate(
+      [ 'register' ],
+      { queryParams: {
+        action: 'Editar',
+        client: JSON.stringify(client),
+      } }
+    )
   }
 
   onDeleteClient(client: Client) {

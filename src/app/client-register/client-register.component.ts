@@ -55,12 +55,6 @@ export class ClientRegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams
-      .subscribe(
-        (info) => this.action = info['action']
-    )
-
-
     this.clientRegisterForm = new FormGroup({
       'name': new FormControl(null),
       'dob': new FormControl(null),
@@ -82,6 +76,38 @@ export class ClientRegisterComponent implements OnInit {
       ]),
       'tags': new FormControl(null),
     })
+
+    this.route.queryParams
+      .subscribe(
+        (info) => {
+          this.action = info['action'];
+          const client = JSON.parse(info['client']);
+          // console.log((<FormArray>this.clientRegisterForm.controls['adresses']).controls[0]);
+          console.log(client);
+
+          this.clientRegisterForm.setValue({
+            name: client.name,
+            dob: client.dob,
+            phone: client.phone,
+            email: client.email,
+            contact: client.contact,
+            indicatedBy: client.indicatedBy,
+            plan: client.plan,
+            adresses: [ {
+              street: client.address[0].street,
+              number: client.address[0].number,
+              neighborhood: client.address[0].neighborhood,
+              city: client.address[0].city,
+              state: client.address[0].state,
+              complement: client.address[0].complement,
+              alias: client.address[0].alias
+            } ],
+            tags: client.tags
+          })
+
+          console.log(this.clientRegisterForm.controls);
+        }
+    )
 
     this.clientNamesList = this.clientNames;
     this.filteredNames = this.clientRegisterForm.get('indicatedBy').valueChanges.pipe(
