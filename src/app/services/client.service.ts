@@ -1,10 +1,14 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Client, Contact, Plan } from "../model/client.model";
 
 @Injectable({ providedIn: 'root' })
 export class ClientService {
+  onClientListChange = new Subject<Client[]>();
+
   clients: Client[] = [
     {
+      _id: 1,
       name: 'Liam Neesson',
       dob: new Date(1990, 8, 16),
       phone: '5511988776655',
@@ -27,6 +31,7 @@ export class ClientService {
     },
 
     {
+      _id: 2,
       name: 'Isabella Patel',
       dob: new Date(1996, 4, 3),
       phone: '5511988776655',
@@ -49,6 +54,7 @@ export class ClientService {
     },
 
     {
+      _id: 3,
       name: 'Sophia Smith',
       dob: new Date(1989, 2, 21),
       phone: '5511988776655',
@@ -71,6 +77,7 @@ export class ClientService {
     },
 
     {
+      _id: 4,
       name: 'Noah Patel',
       dob: new Date(2002, 1, 28),
       phone: '5511988776655',
@@ -93,6 +100,7 @@ export class ClientService {
     },
 
     {
+      _id: 5,
       name: 'Emma Singh',
       dob: new Date(2001, 5, 12),
       phone: '5511988776660',
@@ -115,6 +123,7 @@ export class ClientService {
     },
 
     {
+      _id: 6,
       name: 'Kim Tanaka',
       dob: new Date(2002, 10, 2),
       phone: '5511988776655',
@@ -139,5 +148,10 @@ export class ClientService {
 
   findAll() {
     return this.clients;
+  }
+
+  deleteById(id: number) {
+    this.clients = this.clients.filter(client => client._id !== id);
+    this.onClientListChange.next(this.findAll());
   }
 }

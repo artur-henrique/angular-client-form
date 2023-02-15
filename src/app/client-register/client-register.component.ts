@@ -12,6 +12,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 // import { ElementRef, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-register',
@@ -19,6 +20,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./client-register.component.css']
 })
 export class ClientRegisterComponent implements OnInit {
+  action: string;
   clientRegisterForm: FormGroup;
   phoneMask = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -48,10 +50,17 @@ export class ClientRegisterComponent implements OnInit {
   tags: string[] = [];
 
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.route.queryParams
+      .subscribe(
+        (info) => this.action = info['action']
+    )
+
+
     this.clientRegisterForm = new FormGroup({
       'name': new FormControl(null),
       'dob': new FormControl(null),

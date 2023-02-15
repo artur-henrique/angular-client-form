@@ -1,6 +1,7 @@
 import { ThemePalette } from '@angular/material/core';
 
 export interface Client {
+  _id: number;
   name: string;
   dob: Date; // Date of Birth
   phone: string;

@@ -2,14 +2,14 @@
   <mat-list role="list">
     <mat-list-item
       role="listItem"
-      *ngFor="let client of clients">
+      *ngFor="let client of paginationSlice">
       <span class="client-name">{{client.name}}</span>
-      <button>
+      <button (click)="onEditClient($event)">
         <span class="material-symbols-outlined">
           edit_square
         </span>
       </button>
-      <button>
+      <button (click)="onDeleteClient(client)">
         <span class="material-symbols-outlined">
           delete
         </span>
@@ -33,6 +33,7 @@
     [length]="length"
     [pageSize]="pageSize"
     [pageSizeOptions]="[3, 5, 10, 20]"
-    aria-label="Select page">
+    aria-label="Select page"
+    (page)="onPageChange($event)">
   </mat-paginator>
 </div>
