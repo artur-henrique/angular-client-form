@@ -9,7 +9,6 @@
       <mat-form-field>
         <mat-label>Nome</mat-label>
         <input
-          pattern="/a-Z/"
           type="text"
           matInput
           placeholder=""
@@ -54,7 +53,9 @@
           formControlName="email">
       </mat-form-field>
     </p>
-    <span *ngIf="!clientRegisterForm.get('email').valid && clientRegisterForm.get('email').touched">
+    <span
+      class="invalid-field"
+     *ngIf="!clientRegisterForm.get('email').valid && clientRegisterForm.get('email').touched">
       Please enter a valid email!
     </span>
 
