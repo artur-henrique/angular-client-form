@@ -163,4 +163,20 @@ export class ClientService {
     this.clients = this.clients.filter(client => client._id !== id);
     this.onClientListChange.next(this.findAll());
   }
+
+  create(newClient: Client) {
+    const clientData = Object.assign(newClient);
+
+    const clientIndex = this.clients
+    .findIndex(client => client.name === newClient.name);
+
+    if (clientIndex !== -1) {  // Should update
+      this.clients[clientIndex] = clientData;
+    } else {
+      clientData._id = this.clients.at(-1)._id + 1;
+      this.clients.push(clientData);
+    }
+
+    this.onClientListChange.next(this.findAll());
+  }
 }

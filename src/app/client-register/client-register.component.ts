@@ -172,6 +172,7 @@ export class ClientRegisterComponent implements OnInit {
 
   save() {
     console.log(this.clientRegisterForm);
+    this.clientService.create(this.clientRegisterForm.value);
   }
 
   get adresses() {
