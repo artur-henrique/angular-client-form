@@ -17,6 +17,7 @@ export interface Address {
   street: string;
   number: number;
   neighborhood: string;
+  cep: string;
   city: string;
   state: string;
   complement: string;
