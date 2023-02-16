@@ -51,6 +51,7 @@ export class ClientRegisterComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private route: ActivatedRoute,
+    private router: Router,
     private cepService: CepService
   ) {}
 
@@ -177,8 +178,12 @@ export class ClientRegisterComponent implements OnInit {
   // End of Helper functions of Contact
 
   save() {
-    console.log(this.clientRegisterForm);
     this.clientService.create(this.clientRegisterForm.value);
+    this.router.navigate(['/']);
+  }
+
+  cancel() {
+    this.router.navigate(['/']);
   }
 
   get adresses() {

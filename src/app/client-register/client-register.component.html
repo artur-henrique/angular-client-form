@@ -16,7 +16,9 @@
     </p>
 
     <p>
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field
+        class="btn-md"
+        appearance="fill">
         <mat-label>Data de nascimento</mat-label>
         <input
           formControlName="dob"
@@ -31,7 +33,7 @@
     </p>
 
     <p>
-      <mat-form-field>
+      <mat-form-field class="btn-md">
         <mat-label>Telefone</mat-label>
         <input
           type="tel"
@@ -125,6 +127,16 @@
       color="primary">Salvar
     </button>
 
+    <button
+      [ngStyle]="{'margin-left': '1em' }"
+      type="button"
+      mat-flat-button
+      color="warn"
+      (click)="cancel()"
+    >
+    Cancelar
+    </button>
+
   </div>
 
   <div class="right-side">
@@ -144,7 +156,8 @@
               formControlName="street">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field
+          class="btn-sm">
             <mat-label>Número</mat-label>
             <input
               type="text"
