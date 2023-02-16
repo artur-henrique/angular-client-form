@@ -117,6 +117,7 @@
 
     <button
       class="btn"
+      [disabled]="!clientRegisterForm.valid"
       type="submit"
       mat-flat-button
       color="primary">Salvar

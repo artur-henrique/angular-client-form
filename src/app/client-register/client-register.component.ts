@@ -58,13 +58,13 @@ export class ClientRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.clientRegisterForm = new FormGroup({
-      'name': new FormControl(null),
+      'name': new FormControl(null, Validators.required),
       'dob': new FormControl(null),
-      'phone': new FormControl(null),
-      'email': new FormControl(null, [Validators.email, Validators.pattern(/.+@.+\..+/)]),
+      'phone': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
       'contact': new FormControl(null),
       'indicatedBy': new FormControl(null),
-      'plan': new FormControl(null),
+      'plan': new FormControl(null, Validators.required),
       'adresses': new FormArray([
         new FormGroup({
           'street': new FormControl(null),
