@@ -28,17 +28,17 @@ export class ClientService {
           alias: 'Residencial'
         },
         {
-          street: 'R. Bacharel Clito César Rabelo',
-          number: 86,
-          neighborhood: 'São Judas',
+          street: 'R. Indaial',
+          number: 254,
+          neighborhood: 'São João',
           cep: '',
-          city: 'Itajaí',
+          city: 'Blumenau',
           state: 'Santa Catarina',
-          complement: 'Perto da panificadora Big Pão',
+          complement: 'Perto do Shopping Itaguaçu',
           alias: 'Residencial'
         },
       ],
-      tags: [ 'semanal', 'mensal' ]
+      tags: [ 'semanal' ]
     },
 
     {

@@ -89,29 +89,22 @@ export class ClientRegisterComponent implements OnInit {
 
           const client = JSON.parse(info['client']);
 
-          // const addressList = client.adresses.map(address => new FormControl(address));
-          // console.log(addressList); // Tentativa de adicionar os endereços adicionais no cliente
+          if (client.adresses.length > 1) { // Verifica qtd de endereços
+            for (let i = 1; i < client.adresses.length; i++) {
+              this.onAddAdress();
+            }
+          }
 
           this.clientRegisterForm.setValue({
-            name: client.name,
-            dob: client.dob,
-            phone: client.phone,
-            email: client.email,
-            contact: client.contact,
-            indicatedBy: client.indicatedBy,
-            plan: client.plan,
-            adresses:
-              [ {
-                street: client.adresses[0].street,
-                number: client.adresses[0].number,
-                neighborhood: client.adresses[0].neighborhood,
-                cep: client.adresses[0].cep,
-                city: client.adresses[0].city,
-                state: client.adresses[0].state,
-                complement: client.adresses[0].complement,
-                alias: client.adresses[0].alias
-              } ],
-            tags: client.tags
+            'name': client.name,
+            'dob': client.dob,
+            'phone': client.phone,
+            'email': client.email,
+            'contact': client.contact,
+            'indicatedBy': client.indicatedBy,
+            'plan': client.plan,
+            'adresses': client.adresses,
+            'tags': client.tags
           })
         }
     )
@@ -226,10 +219,6 @@ export class ClientRegisterComponent implements OnInit {
     this.tags.push(event.option.viewValue);
     // this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
-  }
-
-  teste(event: InputEvent) {
-    console.log(event);
   }
 
   onCepChange(value: string) {
