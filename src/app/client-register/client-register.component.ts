@@ -151,7 +151,7 @@ export class ClientRegisterComponent implements OnInit {
     console.log(this.task.subtasks.every(t => t.completed));
     (<FormControl>this.clientRegisterForm.get('contact')).setValue(
       this.task.subtasks.filter(t => t.completed).map(contact => contact.value)
-    ); // Está gerando um bug quando desmarca todas subtasks manualmente
+    );
   }
 
   someComplete(): boolean {
@@ -219,7 +219,6 @@ export class ClientRegisterComponent implements OnInit {
     const value = (event.value || '').trim();
     // Add our tag
     if (value) {
-      // this.tags.push(value);
       this.tagList.setValue([...this.tagList.value, value]);
     }
     // Clear the input value
@@ -228,17 +227,17 @@ export class ClientRegisterComponent implements OnInit {
   }
 
   remove(tag: string): void {
-    const index = this.tagList.value.indexOf(tag);
+    const newTagList = [...this.tagList.value];
+    const index = newTagList.findIndex(tagItem => tagItem === tag);
 
     if (index >= 0) {
-      this.tagList.value.splice(index, 1);
+      newTagList.splice(index, 1);
+      this.tagList.setValue(newTagList);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.tagList.setValue([...this.tagList.value, event.option.viewValue]);
-    // this.tags.push(event.option.viewValue);
-    // this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
   }
 
