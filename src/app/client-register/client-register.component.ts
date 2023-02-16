@@ -9,7 +9,6 @@ import {map, startWith} from 'rxjs/operators';
 
 // MatChip
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-// import { ElementRef, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -43,7 +42,6 @@ export class ClientRegisterComponent implements OnInit {
   filteredNames: Observable<string[]>;
 
   // MatChips
-  // @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   tagControl = new FormControl(null);
   separatorKeysCodes: number[] = [ENTER, COMMA];
   allTags: string[] = ['Diário', 'Semanal', 'Mensal', 'Anual'];
