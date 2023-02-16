@@ -96,21 +96,21 @@ export class ClientRegisterComponent implements OnInit {
           }
 
           this.task.subtasks.forEach(task => { // Seta contacts
-            if (client.contact.includes(task.value)) {
+            if (client.contact?.includes(task.value)) {
               task.completed = true;
             }
           })
 
-          if (client.contact.length === 3) {
+          if (client.contact?.length === 3) {
             this.allComplete = true;
           }
-
 
           this.clientRegisterForm.patchValue({
             'name': client.name,
             'dob': client.dob,
             'phone': client.phone,
             'email': client.email,
+            'contact': client.contact,
             'indicatedBy': client.indicatedBy,
             'plan': client.plan,
             'adresses': client.adresses,
@@ -195,6 +195,10 @@ export class ClientRegisterComponent implements OnInit {
     return this.clientRegisterForm.get('contact').value;
   }
 
+  get tagList() {
+    return <FormControl>this.clientRegisterForm.get('tags')
+  }
+
   onAddAdress() {
     const newAddressGroup = new FormGroup({
       'street': new FormControl(null),
@@ -215,7 +219,8 @@ export class ClientRegisterComponent implements OnInit {
     const value = (event.value || '').trim();
     // Add our tag
     if (value) {
-      this.tags.push(value);
+      // this.tags.push(value);
+      this.tagList.setValue([...this.tagList.value, value]);
     }
     // Clear the input value
     event.chipInput!.clear();
@@ -223,37 +228,19 @@ export class ClientRegisterComponent implements OnInit {
   }
 
   remove(tag: string): void {
-    const index = this.tags.indexOf(tag);
+    const index = this.tagList.value.indexOf(tag);
 
     if (index >= 0) {
-      this.tags.splice(index, 1);
+      this.tagList.value.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.tags.push(event.option.viewValue);
+    this.tagList.setValue([...this.tagList.value, event.option.viewValue]);
+    // this.tags.push(event.option.viewValue);
     // this.tagInput.nativeElement.value = '';
     this.tagControl.setValue(null);
   }
-
-  // onCepChange(value: string) {
-  //   const cep = value.replace(/\D/g, '');
-  //   if (cep.length === 8) {
-  //     this.cepService.searchForAddress(cep)
-  //       .subscribe(addr => {
-  //         this.clientRegisterForm.patchValue({
-  //           adresses:
-  //             [ {
-  //               street: addr.logradouro,
-  //               neighborhood: addr.bairro,
-  //               city: addr.localidade,
-  //               state: addr.uf,
-  //               complement: addr.complemento,
-  //             } ],
-  //         })
-  //       })
-  //   }
-  // }
 
   onCepChange(value: string, vl: number) {
     const cep = value.replace(/\D/g, '');
