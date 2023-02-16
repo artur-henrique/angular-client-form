@@ -89,6 +89,8 @@ export class ClientRegisterComponent implements OnInit {
 
           const client = JSON.parse(info['client']);
 
+          console.log(client);
+
           if (client.adresses.length > 1) { // Verifica qtd de endereços
             for (let i = 1; i < client.adresses.length; i++) {
               this.onAddAdress();
@@ -221,23 +223,42 @@ export class ClientRegisterComponent implements OnInit {
     this.tagControl.setValue(null);
   }
 
-  onCepChange(value: string) {
+  // onCepChange(value: string) {
+  //   const cep = value.replace(/\D/g, '');
+  //   if (cep.length === 8) {
+  //     this.cepService.searchForAddress(cep)
+  //       .subscribe(addr => {
+  //         this.clientRegisterForm.patchValue({
+  //           adresses:
+  //             [ {
+  //               street: addr.logradouro,
+  //               neighborhood: addr.bairro,
+  //               city: addr.localidade,
+  //               state: addr.uf,
+  //               complement: addr.complemento,
+  //             } ],
+  //         })
+  //       })
+  //   }
+  // }
+
+  onCepChange(value: string, vl: number) {
     const cep = value.replace(/\D/g, '');
     if (cep.length === 8) {
       this.cepService.searchForAddress(cep)
         .subscribe(addr => {
-          this.clientRegisterForm.patchValue({
-            adresses:
-              [ {
-                street: addr.logradouro,
-                neighborhood: addr.bairro,
-                city: addr.localidade,
-                state: addr.uf,
-                complement: addr.complemento,
-              } ],
+        (<FormArray>this.clientRegisterForm.controls['adresses']).controls[vl].patchValue({
+            street: addr.logradouro,
+            neighborhood: addr.bairro,
+            city: addr.localidade,
+            state: addr.uf,
+            complement: addr.complemento,
           })
         })
     }
   }
-
 }
+
+
+
+

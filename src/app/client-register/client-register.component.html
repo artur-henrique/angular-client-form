@@ -162,9 +162,8 @@
             <mat-form-field>
               <mat-label>CEP</mat-label>
               <input
-                name="{{i}}"
                 type="text"
-                (ngModelChange)="onCepChange($event)"
+                (ngModelChange)="onCepChange($event, i)"
                 matInput
                 placeholder=""
                 formControlName="cep">
