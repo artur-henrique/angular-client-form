@@ -62,8 +62,11 @@
     <section
     class="example-section">
     <span class="example-list-section">
+      <input
+      type="hidden"
+      formControlName="contact"
+      >
       <mat-checkbox
-          formControlName="contact"
           class="example-margin"
           [checked]="allComplete"
           [color]="task.color"
@@ -76,6 +79,7 @@
         <ul>
           <li *ngFor="let subtask of task.subtasks">
             <mat-checkbox
+              aria-label="Contact by {{subtask.name}}"
               [(ngModel)]="subtask.completed"
               [ngModelOptions]="{ standalone: true}"
               [color]="subtask.color"

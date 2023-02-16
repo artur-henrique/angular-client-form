@@ -26,6 +26,7 @@ export class ClientRegisterComponent implements OnInit {
   phoneMask = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   // Contact
+  allComplete: boolean = false;
   task: Task = {
     name: 'Todos',
     completed: false,
@@ -36,7 +37,6 @@ export class ClientRegisterComponent implements OnInit {
       { name: 'E-mail', value: 'email', completed: false, color: 'accent' },
     ],
   };
-  allComplete: boolean = false;
 
   // Indication
   clientNamesList: string[];
@@ -89,20 +89,28 @@ export class ClientRegisterComponent implements OnInit {
 
           const client = JSON.parse(info['client']);
 
-          console.log(client);
-
           if (client.adresses.length > 1) { // Verifica qtd de endereços
             for (let i = 1; i < client.adresses.length; i++) {
               this.onAddAdress();
             }
           }
 
-          this.clientRegisterForm.setValue({
+          this.task.subtasks.forEach(task => { // Seta contacts
+            if (client.contact.includes(task.value)) {
+              task.completed = true;
+            }
+          })
+
+          if (client.contact.length === 3) {
+            this.allComplete = true;
+          }
+
+
+          this.clientRegisterForm.patchValue({
             'name': client.name,
             'dob': client.dob,
             'phone': client.phone,
             'email': client.email,
-            'contact': client.contact,
             'indicatedBy': client.indicatedBy,
             'plan': client.plan,
             'adresses': client.adresses,
@@ -140,9 +148,10 @@ export class ClientRegisterComponent implements OnInit {
   // Helper functions of Contact
   updateAllComplete() {
     this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
-    this.clientRegisterForm.get('contact').setValue(
+    console.log(this.task.subtasks.every(t => t.completed));
+    (<FormControl>this.clientRegisterForm.get('contact')).setValue(
       this.task.subtasks.filter(t => t.completed).map(contact => contact.value)
-    );
+    ); // Está gerando um bug quando desmarca todas subtasks manualmente
   }
 
   someComplete(): boolean {
@@ -180,6 +189,10 @@ export class ClientRegisterComponent implements OnInit {
 
   get clientNames() {
     return this.clientService.findAll().map(client => client.name);
+  }
+
+  get contacts() {
+    return this.clientRegisterForm.get('contact').value;
   }
 
   onAddAdress() {
