@@ -17,7 +17,6 @@
 
     <p>
       <mat-form-field
-        class="btn-md"
         appearance="fill">
         <mat-label>Data de nascimento</mat-label>
         <input
@@ -62,11 +61,8 @@
     <section
     class="example-section">
     <span class="example-list-section">
-      <input
-      type="hidden"
-      formControlName="contact"
-      >
       <mat-checkbox
+        formControlName="contact"
           class="example-margin"
           [checked]="allComplete"
           [color]="task.color"
@@ -132,8 +128,7 @@
       type="button"
       mat-flat-button
       color="warn"
-      (click)="cancel()"
-    >
+      (click)="cancel()">
     Cancelar
     </button>
 
@@ -156,8 +151,7 @@
               formControlName="street">
           </mat-form-field>
 
-          <mat-form-field
-          class="btn-sm">
+          <mat-form-field>
             <mat-label>Número</mat-label>
             <input
               type="text"
